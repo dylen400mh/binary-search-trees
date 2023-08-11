@@ -99,8 +99,11 @@ const Tree = (array) => {
   };
 
   // returns array of values in level order
-  const levelOrder = (array = [], queue = [], node = root) => {
+  const levelOrder = (callback = null, array = [], queue = [], node = root) => {
     if (node === null) return;
+
+    // perform callback function on node data
+    if (callback) callback(node.data);
 
     // add root to array
     array.push(node.data);
@@ -112,11 +115,13 @@ const Tree = (array) => {
     // while there are still elements in the queue
     while (queue.length) {
       const nextNode = queue.shift();
-      levelOrder(array, queue, nextNode);
+      levelOrder(callback, array, queue, nextNode);
     }
 
     return array;
   };
+
+  
 
   return {
     root,
