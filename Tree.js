@@ -187,8 +187,8 @@ const Tree = (array) => {
     if (node === null) return -1;
 
     // get heights of children nodes
-    const leftHeight = (node.left);
-    const rightHeight = (node.right);
+    const leftHeight = height(node.left);
+    const rightHeight = height(node.right);
 
     // return height of current node
     return Math.max(leftHeight, rightHeight) + 1;
@@ -222,10 +222,11 @@ const Tree = (array) => {
   // rebalances an unbalanced binary tree
   const rebalance = () => {
     // get array of values using any traversal method
-    const array = levelOrder();
-
-    // overwrite root to new balanced tree
+    const array = [...levelOrder()].sort((a, b) => a - b);
+    // overwrite and return new balanced tree
     root = buildTree(array);
+
+    return root;
   }
 
   return {
