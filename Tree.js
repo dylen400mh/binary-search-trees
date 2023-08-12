@@ -149,13 +149,13 @@ const Tree = (array) => {
     if (callback) callback(node);
 
     // perform pre-order traveral on left child node
-    preOrder(callback, array, node.left);
+    inOrder(callback, array, node.left);
 
     // add node data to array
     array.push(node.data);
 
     // perform pre-order traversal on right child node
-    preOrder(callback, array, node.right);
+    inOrder(callback, array, node.right);
 
     return array;
   }
@@ -169,8 +169,8 @@ const Tree = (array) => {
     if (callback) callback(node);
 
     // perform preOrder traveral on child nodes
-    preOrder(callback, array, node.left);
-    preOrder(callback, array, node.right);
+    postOrder(callback, array, node.left);
+    postOrder(callback, array, node.right);
 
     // add node data to array
     array.push(node.data);
