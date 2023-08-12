@@ -214,7 +214,7 @@ const Tree = (array) => {
     if (node === null) return true;
 
     // get height difference of child branches
-    const heightDifference = Math.abs((isBalanced(node.left) - isBalanced(node.right)));
+    const heightDifference = Math.abs((height(node.left) - height(node.right)));
 
     return (heightDifference <= 1 && isBalanced(node.left) && isBalanced(node.right));
   }
