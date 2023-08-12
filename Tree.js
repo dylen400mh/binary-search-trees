@@ -102,8 +102,8 @@ const Tree = (array) => {
   const levelOrder = (callback = null, array = [], queue = [], node = root) => {
     if (node === null) return;
 
-    // perform callback function on node data
-    if (callback) callback(node.data);
+    // perform callback function on node
+    if (callback) callback(node);
 
     // add root to array
     array.push(node.data);
@@ -121,7 +121,101 @@ const Tree = (array) => {
     return array;
   };
 
-  
+  // pre-order traversal on tree nodes (parent, left child, right child)
+  const preOrder = (callback = null, array = [], node = root) => {
+    // base case
+    if (node === null) return;
+
+    // perform callback function on node
+    if (callback) callback(node);
+
+    // add node data to array
+    array.push(node.data);
+
+    // perform preOrder traveral on child nodes
+    preOrder(callback, array, node.left);
+    preOrder(callback, array, node.right);
+
+    return array;
+
+  }
+
+  // in-order traversal on tree nodes (left child, parent, right child)
+  const inOrder = (callback = null, array = [], node = root) => {
+    // base case
+    if (node === null) return;
+
+    // perform callback function on node
+    if (callback) callback(node);
+
+    // perform pre-order traveral on left child node
+    preOrder(callback, array, node.left);
+
+    // add node data to array
+    array.push(node.data);
+
+    // perform pre-order traversal on right child node
+    preOrder(callback, array, node.right);
+
+    return array;
+  }
+
+  // post-order traversal on tree nodes (left child, right child, parent)
+  const postOrder = (callback = null, array = [], node = root) => {
+    // base case
+    if (node === null) return;
+
+    // perform callback function on node
+    if (callback) callback(node);
+
+    // perform preOrder traveral on child nodes
+    preOrder(callback, array, node.left);
+    preOrder(callback, array, node.right);
+
+    // add node data to array
+    array.push(node.data);
+
+    return array;
+  }
+
+  /*Returns number of edges in longest path from a given node to a leaf node.
+  Leaf height = 0 */
+  const height = (node = root) => {
+    // Base case: Height of null is -1
+    if (node === null) return -1;
+
+    // get heights of children nodes
+    const leftHeight = (node.left);
+    const rightHeight = (node.right);
+
+    // return height of current node
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  /* Returns depth: Number of edges in path from a given node to the tree’s root node
+  Root height = 0 */
+  const depth = (node = root, depth = 0) => {
+    // Base case: Node is reached
+    if (node === root) return depth;
+
+    // If node doesn't exist
+    if (!node) return null;
+
+    // If node is less than root, traverse left. Otherwise, traverse right.
+    (node.data < root.data) ? depth(node.left, ++depth) : depth(node.right, ++depth);
+  }
+
+  /* Checks if a tree is balanced.
+  Difference between heights of left subtree and right subtree of every node is not more than 1 */
+  const isBalanced = (node = root) => {
+    // if base case is reached, the tree is balanced
+    if (node === null) return true;
+
+    // get height difference of child branches
+    const heightDifference = Math.abs((isBalanced(node.left) - isBalanced(node.right)));
+
+    return (heightDifference && isBalanced(node.left) && isBalanced(node.right));
+  }
 
   return {
     root,
@@ -130,6 +224,12 @@ const Tree = (array) => {
     remove,
     find,
     levelOrder,
+    preOrder,
+    inOrder,
+    postOrder,
+    height,
+    depth,
+    isBalanced
   };
 };
 
