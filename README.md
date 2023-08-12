@@ -1,6 +1,6 @@
 # Binary Search Tree Implementation
 
-This repository contains an implementation of a balanced binary search tree in JavaScript. The binary search tree is implemented using a `Node` class and a `Tree` class, along with various utility functions for insertion, deletion, traversal, balancing, and more.
+This repository contains an implementation of a balanced binary search tree in JavaScript. The binary search tree is implemented using a `Node` factory and a `Tree` factory, along with various utility functions for insertion, deletion, traversal, balancing, and more.
 
 ## Factory Functions
 
