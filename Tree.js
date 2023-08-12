@@ -214,7 +214,16 @@ const Tree = (array) => {
     // get height difference of child branches
     const heightDifference = Math.abs((isBalanced(node.left) - isBalanced(node.right)));
 
-    return (heightDifference && isBalanced(node.left) && isBalanced(node.right));
+    return (heightDifference <= 1 && isBalanced(node.left) && isBalanced(node.right));
+  }
+
+  // rebalances an unbalanced binary tree
+  const rebalance = () => {
+    // get array of values using any traversal method
+    const array = levelOrder();
+
+    // overwrite root to new balanced tree
+    root = buildTree(array);
   }
 
   return {
@@ -229,7 +238,8 @@ const Tree = (array) => {
     postOrder,
     height,
     depth,
-    isBalanced
+    isBalanced,
+    rebalance
   };
 };
 
