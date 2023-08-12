@@ -23,18 +23,20 @@ const Tree = (array) => {
 
   // insert value into tree
   const insert = (value, node = root) => {
-    // while the current node's children are not null, traverse left/right depending on the value passed
-    while (node.left && node.right) {
-      if (value < node.left) {
-        node.left = this.insert(value, node.left);
-      } else if (value > node.right) {
-        node.right = this.insert(value, node.right);
-      }
+    if (node === null) return Node(value)
+
+    if (value < node.data) {
+      node.left = insert(value, node.left);
+    } else if (value > node.data) {
+      node.right = insert(value, node.right);
     }
 
-    // insert value
-    if (node.left === null) node.left = value;
-    else if (node.right === null) node.right = value;
+    // // create new node for insertion
+    // const newNode = Node(value);
+
+    // // insert value
+    // if (newNode.data < node.data) node.left = newNode;
+    // else if (newNode.data > node.data) node.right = newNode;
 
     return node;
   };
